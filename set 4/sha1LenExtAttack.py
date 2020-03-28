@@ -71,7 +71,6 @@ print(message)
 print("MAC",end=':')
 print(mac)
 
-
 # New Message to be intercepted
 print("New Message to be Intercepted",end=":")
 print(retPadding(key+message,-1)+newMessage)
