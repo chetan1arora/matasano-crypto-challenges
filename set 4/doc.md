@@ -24,6 +24,11 @@ Using the same state of sha1 algo, we can append any new message to the old mess
 
 
 
+# Artificial timing attack with short circuit string comparisions:
 
+Done with artificial timing leak of 50 ms
 
+Decreasing the time, needed the code to be more optimum, and including time for code execution on server side.
 
+If optimised the parameters, can work in real world(Ignoring web traffic costs).
+Done with binary on local machine using buffer read-write to process tube.

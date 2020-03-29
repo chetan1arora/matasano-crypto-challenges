@@ -68,7 +68,7 @@ def checkMAC(digest, testDigest):
     if(len(digest) != len(testDigest)):
         print("Digest Length mismatch")
     for i in range(len(digest)):
-        time.sleep(.05)
+        time.sleep(.005)
         if(digest[i] != testDigest[i]):
             return 500
 
