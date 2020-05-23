@@ -18,3 +18,7 @@ p: public key = p%p = 0
 p-1 public key = (p\*p)%p = 1
 
 So, we change public keys without injecting them.
+
+# RSA Implementation
+
+Crypto.Util.number contains functions getPrime(numOfBits)
