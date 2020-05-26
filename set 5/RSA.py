@@ -1,8 +1,10 @@
 import sys
 from Crypto import *
 from Crypto.Util import *
+import math
 
 # invmod implementation
+#### Change this implementation to stack based
 def egcd(a,m):
 	# ax + my = gcd(a,m)
 	if(a == 0):
@@ -35,8 +37,7 @@ def modexp(x,y,p):
 	return res
 
 # Implementing RSA
-def genKey(numBits):
-	e = 3
+def genKey(numBits,e=3):
 	while(True):
 		p = number.getPrime(numBits)
 		q = number.getPrime(numBits)
@@ -53,6 +54,7 @@ def genKey(numBits):
 def encrypt(message,pubkey):
 	message = int(message.hex(),16)
 	(e,modn) = pubkey
+	# Add CRT Optimization for encryption
 	enc = modexp(message,e,modn)
 	enc = hex(enc).replace('0x','')
 	if(len(enc)%2):
@@ -65,6 +67,7 @@ def decrypt(enc,privatekey):
 	(d,modn) = privatekey
 	mes = modexp(enc,d, modn)
 	mes = hex(mes).replace('0x','')
+
 	if(len(mes)%2):
 		mes = '0'+mes
 	return bytes.fromhex(mes)
