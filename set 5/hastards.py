@@ -1,6 +1,5 @@
 # Hastards Broadcast Attack
 # Best source by Jeff Sukuzi
-import RSA
 from RSA import *
 # ciphers list 
 # (e,pubkey) for pubkeys
@@ -23,7 +22,9 @@ def broadcastAttack(ciphers, pubkeys):
 		temp = (modN//pubkeys[i][1])
 		numSum += temp*invMul(temp,pubkeys[i][1])*ciphers[i]
 	numSum %= modN
-	mes = round(math.pow(numSum,1/e))
+	# Here, Rooting is not working for bignums.
+	# pow(math) is converting the bignum.
+	mes = invPow(numSum,e)
 	return mes
 
 if __name__ == "__main__":
@@ -32,16 +33,16 @@ if __name__ == "__main__":
 	mes = input().encode('utf-8')
 	ciphers = []
 	pubkeys = []
-	e = 7
+	e = 41
 	for i in range(e):
 		# Delete privatekeys
-		pubk,_ = genKey(512,e)
+		pubk,_ = genKey(1024,e)
 		enc = encrypt(mes,pubk)
 		enc = int(enc.hex(),16)
 		ciphers.append(enc)
 		pubkeys.append(pubk)
 
-	_ = 0
+	privatek = 0
 	print("[+] Encrypted using different public keys and broadcasting...")
 	crackedMessage = broadcastAttack(ciphers, pubkeys)
 	crackedMessage = hex(crackedMessage).replace('0x','')
