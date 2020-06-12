@@ -1,7 +1,6 @@
 from RSA import *
 import random
 
-
 def mutateMessage(enc,pubkey):
 	(e,modn) = pubkey
 	param = random.randint(2,modn-1)
